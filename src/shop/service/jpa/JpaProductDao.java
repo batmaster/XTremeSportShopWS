@@ -1,17 +1,14 @@
 package shop.service.jpa;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 import shop.entity.Product;
+import shop.entity.ProductPrice;
 import shop.entity.Products;
 import shop.service.ProductDao;
-import jersey.repackaged.com.google.common.collect.Lists;
 
 /**
  * Data access object for saving and retrieving contacts,
@@ -41,8 +38,11 @@ public class JpaProductDao extends ProductDao {
 	 * @see shop.service.ProductDao#find(long)
 	 */
 	@Override
-	public Product find(long id) {
-		return em.find(Product.class, id);
+	public Products find(long id) {
+		Product productdesc = em.find(Product.class, id);
+		ProductPrice productprice = em.find(ProductPrice.class, id);
+		productdesc.setPrice(productprice.getPrice());
+		return new Products(productdesc);
 	}
 
 	/**
@@ -51,23 +51,15 @@ public class JpaProductDao extends ProductDao {
 	 */
 	@Override
 	public Products findAll() {
-//		Query query = em.createQuery("SELECT pd.ProductDescriptionId AS id, pd.ProductName AS name, pd.Description AS description, p.Price AS price FROM Products p, ProductDescriptions pd WHERE p.ProductDescriptionId = pd.ProductDescriptionId");
-//		Query query = em.createQuery("SELECT p , pd from products p , productDescriptions pd WHERE p.productDescriptionID = pd.ProductDescriptionId");
-//		Query query = em.createQuery("SELECT pd.ProductDescriptionId, pd.ProductName, pd.Description, p.Price FROM Products p INNER JOIN ProductDescriptions pd ON p.ProductDescriptionId = pd.ProductDescriptionId");
 		Query query = em.createQuery("SELECT p FROM ProductDescriptions p");
-		Products result = new Products(new ArrayList<Product>(query.getResultList()));
+		ArrayList<Product> productList = new ArrayList<Product>(query.getResultList());
+		for(int i = 0;i<productList.size();i++){
+			long id = productList.get(i).getId();
+			ProductPrice productprice = em.find(ProductPrice.class, id);
+			productList.get(i).setPrice(productprice.getPrice());
+		}
+		Products result = new Products(productList);
+		
 		return result;
 	}
-
-	/**
-	 * @see shop.service.ProductDao#findByTitle(java.lang.String)
-	 */
-	@Override
-	public Products findByTitle(String titlestr) {
-		Query query = em.createQuery("SELECT c FROM Product c WHERE LOWER(c.title) LIKE :title");
-		query.setParameter("title", "%" + titlestr.toLowerCase() + "%");
-		ArrayList<Product> result = new ArrayList<Product>(query.getResultList());
-		return null;
-	}
-
 }

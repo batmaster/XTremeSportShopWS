@@ -17,11 +17,20 @@ public class Products implements Serializable {
 	@XmlElement(name = "product")
 	private ArrayList<Product> products;
 
-	protected Products() {
-		
+	public Products() {
+		products = new ArrayList<Product>();
+	}
+	
+	public Products(Product product) {
+		products = new ArrayList<Product>();
+		addProduct(product);
 	}
 	
 	public Products(ArrayList<Product> list) {
 		products = list;
+	}
+	
+	public void addProduct(Product product) {
+		products.add(product);
 	}
 }

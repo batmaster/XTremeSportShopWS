@@ -1,8 +1,5 @@
 package shop.service;
 
-import java.util.ArrayList;
-
-import shop.entity.Product;
 import shop.entity.Products;
 
 /**
@@ -22,18 +19,11 @@ public abstract class ProductDao {
 	 * @param id id of the contact that want to find
 	 * @return contact with specific id, null if not found
 	 */
-	public abstract Product find(long id);
+	public abstract Products find(long id);
 	
 	/**
 	 * Get list of all contacts.
 	 * @return list of all contacts
 	 */
 	public abstract Products findAll();
-	
-	/**
-	 * Get list of contacts whose title contains a specific string 
-	 * @param title the specific string
-	 * @return contactlist of contact
-	 */
-	public abstract Products findByTitle(String name);
 }

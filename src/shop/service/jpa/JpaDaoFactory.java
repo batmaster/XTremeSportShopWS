@@ -6,8 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import shop.service.ProductDao;
 import shop.service.DaoFactory;
+import shop.service.ProductDao;
 
 /**
  * JpaDaoFactory is a factory for DAO that use the Java Persistence API (JPA)

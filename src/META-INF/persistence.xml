@@ -10,6 +10,7 @@
 	<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 	<!-- save objects from these Java classes -->
 	<class>shop.entity.Product</class>
+	<class>shop.entity.ProductPrice</class>
 	<!-- describe the database for JPA -->
 	<properties>
 		<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:8889/ecomerce" />

@@ -7,18 +7,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@Entity(name="ProductDescriptions")
-@Table(name="ProductDescriptions")
+@Entity(name="Products")
+@Table(name="Products")
 @XmlRootElement
 @XmlAccessorType (XmlAccessType.FIELD)
-public class Product implements Serializable {
+public class ProductPrice implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -27,23 +26,14 @@ public class Product implements Serializable {
 	private long id;
 	
 	@XmlElement
-	@Column(name="ProductName")
-	private String name;
-	@Transient
+	@Column(name="Price")
 	private double price;
-	@Column(name="Description")
-	private String description;
 	
-	
-	protected Product() {
+	protected ProductPrice() {
 		
 	}
-	
-	public void setPrice(double p) {
-		price = p;
-	}
 
-	public long getId() {
-		return id;
+	public double getPrice() {
+		return price;
 	}
 }

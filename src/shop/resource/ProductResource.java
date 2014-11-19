@@ -1,7 +1,5 @@
 package shop.resource;
 
-import java.util.ArrayList;
-
 import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -15,7 +13,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 
-import shop.entity.Product;
 import shop.entity.Products;
 import shop.service.DaoFactory;
 import shop.service.ProductDao;
@@ -32,19 +29,15 @@ public class ProductResource {
 	public ProductResource() {
 		dao = DaoFactory.getInstance().getContactDao();
 		cache = new CacheControl();
-		cache.setMaxAge(86400);
+		cache.setMaxAge(-1);
 		cache.setPrivate(true);
 		System.out.println("ContactResource Created");
 	}
 	
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response getContact(@QueryParam("q") String title, @Context Request request) {
-		if (title == null) {
-			Products products = dao.findAll();
-			return Response.ok(products).build();
-		}
-		Products products = dao.findByTitle(title);
+	public Response getContact(@Context Request request) {
+		Products products = dao.findAll();
 		return Response.ok(products).build();
 	}
 	
@@ -52,16 +45,16 @@ public class ProductResource {
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_XML)
 	public Response getProduct(@PathParam("id") int id, @Context Request request) {
-		Product contact = dao.find(id);
-		if (contact == null) {
+		Products product = dao.find(id);
+		if (product == null) {
 			return Response.status(NOT_FOUND).build();
 		}
 		
-		EntityTag etag = new EntityTag(Integer.toString(contact.hashCode()));
+		EntityTag etag = new EntityTag(Integer.toString(product.hashCode()));
 		Response.ResponseBuilder builder = request.evaluatePreconditions(etag);
 		// cache changed
 		if (builder == null)
-			builder = Response.ok(contact).tag(etag);
+			builder = Response.ok(product).tag(etag);
 			
 		builder.cacheControl(cache);
 		return builder.build();
