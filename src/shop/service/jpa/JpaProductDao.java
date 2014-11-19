@@ -9,6 +9,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 import shop.entity.Product;
+import shop.entity.Products;
 import shop.service.ProductDao;
 import jersey.repackaged.com.google.common.collect.Lists;
 
@@ -45,12 +46,16 @@ public class JpaProductDao extends ProductDao {
 	}
 
 	/**
+	 * @return 
 	 * @see shop.service.ProductDao#findAll()
 	 */
 	@Override
-	public ArrayList<Product> findAll() {
-		Query query = em.createQuery("SELECT c FROM Contact c");
-		ArrayList<Product> result = new ArrayList<Product>(query.getResultList());
+	public Products findAll() {
+//		Query query = em.createQuery("SELECT pd.ProductDescriptionId AS id, pd.ProductName AS name, pd.Description AS description, p.Price AS price FROM Products p, ProductDescriptions pd WHERE p.ProductDescriptionId = pd.ProductDescriptionId");
+//		Query query = em.createQuery("SELECT p , pd from products p , productDescriptions pd WHERE p.productDescriptionID = pd.ProductDescriptionId");
+//		Query query = em.createQuery("SELECT pd.ProductDescriptionId, pd.ProductName, pd.Description, p.Price FROM Products p INNER JOIN ProductDescriptions pd ON p.ProductDescriptionId = pd.ProductDescriptionId");
+		Query query = em.createQuery("SELECT p FROM ProductDescriptions p");
+		Products result = new Products(new ArrayList<Product>(query.getResultList()));
 		return result;
 	}
 
@@ -58,11 +63,11 @@ public class JpaProductDao extends ProductDao {
 	 * @see shop.service.ProductDao#findByTitle(java.lang.String)
 	 */
 	@Override
-	public ArrayList<Product> findByTitle(String titlestr) {
+	public Products findByTitle(String titlestr) {
 		Query query = em.createQuery("SELECT c FROM Product c WHERE LOWER(c.title) LIKE :title");
 		query.setParameter("title", "%" + titlestr.toLowerCase() + "%");
 		ArrayList<Product> result = new ArrayList<Product>(query.getResultList());
-		return result;
+		return null;
 	}
 
 }

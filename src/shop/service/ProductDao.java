@@ -3,6 +3,7 @@ package shop.service;
 import java.util.ArrayList;
 
 import shop.entity.Product;
+import shop.entity.Products;
 
 /**
  * An abstract for contact dao contains method for handling
@@ -27,12 +28,12 @@ public abstract class ProductDao {
 	 * Get list of all contacts.
 	 * @return list of all contacts
 	 */
-	public abstract ArrayList<Product> findAll();
+	public abstract Products findAll();
 	
 	/**
 	 * Get list of contacts whose title contains a specific string 
 	 * @param title the specific string
 	 * @return contactlist of contact
 	 */
-	public abstract ArrayList<Product> findByTitle(String name);
+	public abstract Products findByTitle(String name);
 }

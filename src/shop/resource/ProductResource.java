@@ -16,10 +16,11 @@ import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 
 import shop.entity.Product;
+import shop.entity.Products;
 import shop.service.DaoFactory;
 import shop.service.ProductDao;
 
-@Path("/product")
+@Path("/products")
 @Singleton
 public class ProductResource {
 	
@@ -39,12 +40,11 @@ public class ProductResource {
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response getContact(@QueryParam("q") String title, @Context Request request) {
-		System.out.println("in get");
 		if (title == null) {
-			ArrayList<Product> products = dao.findAll();
+			Products products = dao.findAll();
 			return Response.ok(products).build();
 		}
-		ArrayList<Product> products = dao.findByTitle(title);
+		Products products = dao.findByTitle(title);
 		return Response.ok(products).build();
 	}
 	
