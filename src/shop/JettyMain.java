@@ -60,7 +60,7 @@ import shop.service.DaoFactory;
  */
 public class JettyMain {
 	
-	static final int PORT = 8080;
+	static final int PORT = 8081;
 	static Server server;
 
 	public static void main(String[] args) throws Exception {
