@@ -34,6 +34,8 @@ public class ProductResource {
 		System.out.println("ContactResource Created");
 	}
 	
+	
+	
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public Response getContact(@Context Request request) {
