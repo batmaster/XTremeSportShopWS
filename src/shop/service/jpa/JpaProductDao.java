@@ -62,4 +62,21 @@ public class JpaProductDao extends ProductDao {
 		
 		return result;
 	}
+
+	@Override
+	public Products findbystr(String str) {
+		Query query = em.createQuery("SELECT p FROM ProductDescriptions p where p.name like :str");
+		query.setParameter("str","%"+str+"%");
+		ArrayList<Product> productList = new ArrayList<Product>(query.getResultList());
+		for(int i = 0;i<productList.size();i++){
+			long id = productList.get(i).getId();
+			ProductPrice productprice = em.find(ProductPrice.class, id);
+			productList.get(i).setPrice(productprice.getPrice());
+		}
+		Products result = new Products(productList);
+		
+		return result;
+	}
+	
+	
 }

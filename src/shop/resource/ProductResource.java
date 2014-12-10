@@ -38,8 +38,14 @@ public class ProductResource {
 	
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response getContact(@Context Request request) {
-		Products products = dao.findAll();
+	public Response getContact(@Context Request request,@QueryParam("search")String search) {
+		Products products;
+		if(search == null){
+			products = dao.findAll();
+		}
+		else{
+			products = dao.findbystr(search);
+		}
 		return Response.ok(products).build();
 	}
 	

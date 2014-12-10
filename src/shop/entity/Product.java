@@ -1,5 +1,7 @@
 package shop.entity;
 import java.io.Serializable;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -46,4 +48,23 @@ public class Product implements Serializable {
 	public long getId() {
 		return id;
 	}
+	
+	@Transient
+	private AtomLinks links = null;
+	
+    @XmlElement(name = "link", namespace = AtomLink.NAMESPACE_ATOM)
+    public AtomLinks getLink() {
+        if (this.links == null) {
+        	try {
+	        	AtomLink self = new AtomLink(new URI(AtomLink.PRODUCT_PATH + id));
+	    		AtomLinks links = new AtomLinks();
+	    		links.add(self);
+	            this.links = links;
+        	} catch (URISyntaxException e) {
+        		
+        	}
+        }
+
+        return this.links;
+    }
 }

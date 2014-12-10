@@ -26,4 +26,6 @@ public abstract class ProductDao {
 	 * @return list of all contacts
 	 */
 	public abstract Products findAll();
+	
+	public abstract Products findbystr(String str);
 }
