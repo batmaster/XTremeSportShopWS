@@ -75,7 +75,7 @@ public class JettyMain {
 		context.setContextPath("/");
 		ServletHolder holder = new ServletHolder( org.glassfish.jersey.servlet.ServletContainer.class );
 		holder.setInitParameter(ServerProperties.PROVIDER_PACKAGES, "shop.resource");
-		context.addServlet( holder, "/*" );
+		context.addServlet( holder, "/api/v2/*" );
 		server.setHandler( context );
 	
 		System.out.println("Starting Jetty server on port " + PORT);
