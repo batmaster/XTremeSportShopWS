@@ -15,7 +15,7 @@ public class AtomLink implements Serializable {
 	public final static String NAMESPACE_ATOM = "http://www.w3.org/2005/Atom";
 	
 	@Transient
-	public final static String PRODUCT_PATH = "http://128.199.145.53:22222/products/";
+	public final static String PRODUCT_PATH = "http://128.199.145.53/tsp/?page=detail&id=";
 	
 	@Transient
 	public final static String SELF = "self";

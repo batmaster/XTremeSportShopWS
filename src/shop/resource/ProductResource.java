@@ -58,14 +58,16 @@ public class ProductResource {
 			return Response.status(NOT_FOUND).build();
 		}
 		
-		EntityTag etag = new EntityTag(Integer.toString(product.hashCode()));
+		EntityTag etag = new EntityTag(Integer.toString(getEtag(product)));
 		Response.ResponseBuilder builder = request.evaluatePreconditions(etag);
-		// cache changed
 		if (builder == null)
 			builder = Response.ok(product).tag(etag);
-			
 		builder.cacheControl(cache);
 		return builder.build();
+	}
+	
+	public int getEtag(Products product){
+		return product.hashCode();
 	}
 	
 	

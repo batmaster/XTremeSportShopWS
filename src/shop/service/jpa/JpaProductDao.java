@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import shop.entity.Product;
+import shop.entity.ProductImage;
 import shop.entity.ProductPrice;
 import shop.entity.Products;
 import shop.service.ProductDao;
@@ -40,8 +41,13 @@ public class JpaProductDao extends ProductDao {
 	@Override
 	public Products find(long id) {
 		Product productdesc = em.find(Product.class, id);
+		
 		ProductPrice productprice = em.find(ProductPrice.class, id);
 		productdesc.setPrice(productprice.getPrice());
+		
+		ProductImage productImage = em.find(ProductImage.class, id);
+		productdesc.setProductImageUrl(productImage.getUrl());
+		
 		return new Products(productdesc);
 	}
 
@@ -57,6 +63,8 @@ public class JpaProductDao extends ProductDao {
 			long id = productList.get(i).getId();
 			ProductPrice productprice = em.find(ProductPrice.class, id);
 			productList.get(i).setPrice(productprice.getPrice());
+			ProductImage productImage = em.find(ProductImage.class, id);
+			productList.get(i).setProductImageUrl(productImage.getUrl());
 		}
 		Products result = new Products(productList);
 		
@@ -72,6 +80,8 @@ public class JpaProductDao extends ProductDao {
 			long id = productList.get(i).getId();
 			ProductPrice productprice = em.find(ProductPrice.class, id);
 			productList.get(i).setPrice(productprice.getPrice());
+			ProductImage productImage = em.find(ProductImage.class, id);
+			productList.get(i).setProductImageUrl(productImage.getUrl());
 		}
 		Products result = new Products(productList);
 		
