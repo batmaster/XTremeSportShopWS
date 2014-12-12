@@ -15,8 +15,8 @@
 	<!-- describe the database for JPA -->
 	<properties>
 		<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ecomerce" />
-		<property name="javax.persistence.jdbc.user" value="tsp" /> <!-- root kur , tsp tsp -->
-		<property name="javax.persistence.jdbc.password" value="tsp" />
+		<property name="javax.persistence.jdbc.user" value="root" /> <!-- root kur , tsp tsp -->
+		<property name="javax.persistence.jdbc.password" value="kur" />
 		<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 		<!-- this option tells EclipseLink to generate schema. Set to "none" to skip ddl generation. -->
 		<property name="eclipselink.ddl-generation" value="none" />
