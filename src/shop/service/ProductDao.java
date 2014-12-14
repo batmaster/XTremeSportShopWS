@@ -24,5 +24,10 @@ public abstract class ProductDao {
 	 */
 	public abstract Products findAll();
 	
+	/**
+	 * Get list all products that contain "str".
+	 * @param str use for search.
+	 * @return list of products.
+	 */
 	public abstract Products findbystr(String str);
 }

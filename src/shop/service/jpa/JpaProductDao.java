@@ -52,7 +52,6 @@ public class JpaProductDao extends ProductDao {
 	}
 
 	/**
-	 * @return 
 	 * @see shop.service.ProductDao#findAll()
 	 */
 	@Override
@@ -71,6 +70,9 @@ public class JpaProductDao extends ProductDao {
 		return result;
 	}
 
+	/**
+	 * @see shop.service.ProductDao#findbystr(String)
+	 */
 	@Override
 	public Products findbystr(String str) {
 		Query query = em.createQuery("SELECT p FROM ProductDescriptions p where p.name like :str");

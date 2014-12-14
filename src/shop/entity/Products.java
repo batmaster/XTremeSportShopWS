@@ -9,11 +9,19 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * Contains list of product.
+ * Use for return productList.
+ * @author Rungroj Maipradit 5510546654
+ */
 @Entity
 @XmlRootElement
 @XmlAccessorType (XmlAccessType.FIELD)
 public class Products implements Serializable {
 	
+	/**
+	 * Contains list of product.
+	 */
 	@XmlElement(name = "product")
 	private ArrayList<Product> products;
 

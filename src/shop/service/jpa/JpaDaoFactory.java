@@ -1,7 +1,5 @@
 package shop.service.jpa;
 
-import java.util.logging.Logger;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -26,11 +24,7 @@ public class JpaDaoFactory extends DaoFactory {
 	private ProductDao contactDao;
 	private final EntityManagerFactory emf;
 	private EntityManager em;
-	private static Logger logger;
 	
-	static {
-		logger = Logger.getLogger(JpaDaoFactory.class.getName());
-	}
 	
 	/**
 	 * Constructor require nothing.
