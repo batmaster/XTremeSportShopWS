@@ -42,10 +42,10 @@ public class JpaDaoFactory extends DaoFactory {
 	}
 	
 	/**
-	 * @see shop.service.DaoFactory#getContactDao()
+	 * @see shop.service.DaoFactory#getProductDao()
 	 */
 	@Override
-	public ProductDao getContactDao() {
+	public ProductDao getProductDao() {
 		return contactDao;
 	}
 	

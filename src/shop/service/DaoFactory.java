@@ -35,7 +35,7 @@ public abstract class DaoFactory {
 	 * Return this subclass factory.
 	 * @return singleton instance of this subclass
 	 */
-	public abstract ProductDao getContactDao();
+	public abstract ProductDao getProductDao();
 	
 	/**
 	 * Method contains function to handle shutdown for DaoFactory.

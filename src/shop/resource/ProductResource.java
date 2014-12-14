@@ -27,18 +27,18 @@ public class ProductResource {
 	private static final int NOT_FOUND = 404;
 	
 	public ProductResource() {
-		dao = DaoFactory.getInstance().getContactDao();
+		dao = DaoFactory.getInstance().getProductDao();
 		cache = new CacheControl();
 		cache.setMaxAge(-1);
 		cache.setPrivate(true);
-		System.out.println("ContactResource Created");
+		System.out.println("Resource Created");
 	}
 	
 	
 	
 	@GET
 	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-	public Response getContact(@Context Request request,@QueryParam("search")String search) {
+	public Response getProduct(@Context Request request,@QueryParam("search")String search) {
 		Products products;
 		if(search == null){
 			products = dao.findAll();
