@@ -46,6 +46,10 @@ public class Product implements Serializable {
 	@Transient
 	private String image;
 	
+	@XmlElement
+	@Transient
+	private String url;
+	
 	protected Product() {
 
 	}
@@ -61,6 +65,10 @@ public class Product implements Serializable {
 	public void setProductImageUrl(String url) {
 		image = url;
 	}
+	
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
 	@Transient
 	@XmlTransient
@@ -74,6 +82,7 @@ public class Product implements Serializable {
 				AtomLinks links = new AtomLinks();
 				links.add(self);
 				this.links = links;
+				setUrl(AtomLink.PRODUCT_PATH + id);
 			} catch (URISyntaxException e) {
 
 			}
